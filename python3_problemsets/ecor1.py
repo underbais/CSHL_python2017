@@ -1,18 +1,26 @@
 #!/usr/bin/env python3
 
-#reverse complementing the string
+#finding EcorI sites
 
 seq = "GATGGGATTGGGGTTTTCCCCTCCCATGTGCTCAAGACTGGCGCTAAAAGTTTTGAGCTTCTCAAAAGTCTAGAGCCACCGTCCAGGGAGCAGGTAGCTGCTGGGCTCCGGGGACACTTTGCGTTCGGGCTGGGAGCGTGCTTTCCACGACGGTGACACGCTTCCCTGGATTGGCAGCCAGACTGCCTTCCGGGTCACTGCCATGGAGGAGCCGCAGTCAGATCCTAGCGTCGAGCCCCCTCTGAGTCAGGAAACATTTTCAGACCTATGGAAACTACTTCCTGAAAACAACGTTCTGTCCCCCTTGCCGTCCCAAGCAATGGATGATTTGATGCTGTCCCCGGACGATATTGAACAATGGTTCACTGAAGACCCAGGTCCAGATGAAGCTCCCAGAATTCGCCAGAGGCTGCTCCCCCCGTGGCCCCTGCACCAGCAGCTCCTACACCGGCGGCCCCTGCACCAGCCCCCTCCTGGCCCCTGTCATCTTCTGTCCCTTCCCAGAAAACCTACCAGGGCAGCTACGGTTTCCGTCTGGGCTTCTTGCATTCTGGGACAGCCAAGTCTGTGACTTGCACGTACTCCCCTGCCCTCAACAAGATGTTTTGCCAACTGGCCAAGACCTGCCCTGTGCAGCTGTGGGTTGATTCCACACCCCCGCCCGGCACCCGCGTCCGCGCCATGGCCATCTACAAGCAGTCACAGCACATGACGGAGGTTGTGAGGCGCTGCCCCCACCATGAGCGCTGCTCAGATAGCGATGGTCTGGCCCCTCCTCAGCATCTTATCCGAGTGGAAGGAAATTTGCGTGTGGAGTATTTGGATGACAGAAACACTTTTCG"
 
-seq = seq.replace('A','t')
-seq = seq.replace('T','a')
-seq = seq.replace('G','c')
-seq = seq.replace('C','g')
-seq_comp = seq.upper()
-print("Complement is:\n",seq_comp)
+print('The position of EcoRI site is:\n',seq.find('GAATTC')+1)
 
-seq_rc = seq_comp[::-1]
+fragments = seq.split('GAATTC')
+fragment1 = fragments[0] + "G"
+fragment2 = 'AATTC' + fragments[1]
+print('First fragment is from 1 to', len(fragment1))
+print('Second fragment is from', len(fragment1)+1, 'to', len(fragment1)+len(fragment2)+1)
 
-print("Reverse complement is:\n", seq_rc)
+#print('Fragment\tPosition\tLength\n',fragment1,'1',len(fragment1),'\n', fragment2, len(fragment1)+1, len(fragment1)+len(fragment2))
 
+table = 'Fragment\tPosition\tLength\n{}\t{}\t{}\n{}\t{}\t{}'
+report = table.format(fragment1,'1',len(fragment1),fragment2,len(fragment1)+1,len(fragment1)+len(fragment2))
+
+print(report)
+
+all_fragments = [fragment1,fragment2]
+all_fragments_sorted = sorted(all_fragments, key=len)
+
+print("Fragments list sorted by length:\n",all_fragments_sorted)
 
