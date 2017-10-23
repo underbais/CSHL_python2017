@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+
+import re
+import numpy as np
+
+with open("pfb.fastq", "r") as fastq:
+	for index,line in enumerate(fastq):
+		if index%4==3:
+			line = line.rstrip("\n")
+			print(line)
+			for base in line:
+				if ord(base)560:
+					print(ord(base))
